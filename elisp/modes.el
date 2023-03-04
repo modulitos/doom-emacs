@@ -14,7 +14,7 @@
   )
 
 (use-package format-all
-  :ensure t
+  ;; :ensure t
   ;; Select the default formatter without opening a dialog:
   :hook ((format-all-mode . format-all-ensure-formatter))
 
@@ -232,44 +232,10 @@
 
 ;; (setq org-mode-hook nil)
 
-(use-package org
-  :mode (("\\.org$" . org-mode))
+(use-package doom-docs
+  ;; :mode (("\\.org$" . org-mode))
   :config
-  (defun my-org-mode-hook ()
-    "Hooks for Org mode."
-    (local-unset-key [C-tab])
-    ;; allow window resizing via M-l and M-h
-    (local-unset-key (kbd "M-l"))
-    (local-unset-key (kbd "M-h"))
-    (local-unset-key (kbd "C-q"))
-
-    ;; From evil-surround package to support anki cloze cards:
-    (push '(?z . ("{{c1::" . "}}")) evil-surround-pairs-alist)
-    ;; (push '(?c1 . ("{{c1::" . "}}")) evil-surround-pairs-alist)
-    ;; (push '(?c2 . ("{{c2::" . "}}")) evil-surround-pairs-alist)
-    ;; (push '(?c3 . ("{{c3::" . "}}")) evil-surround-pairs-alist)
-
-    ;; override default keybinding here:
-    (local-set-key (kbd "C-S-i") 'whitespace-cleanup)
-
-    ;; evil binds <tab> to evil-jump-forward by default.
-    (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
-
-    ;; (local-set-key (kbd "C-c C-c") 'org-table-align)
-    ;; (local-unset-key (kbd "C-c C-c"))
-    ;; (local-set-key (kbd "C-c C-f") 'org-table-calc-current-TBLFM)
-    ;; default is "C-c C-x C-j"
-    ;; (local-set-key (kbd "C-c C-g c") 'org-clock-goto)
-
-    ;; (local-set-key (kbd "C-c C-b") 'org-babel-demarcate-block)
-
-    (toggle-truncate-lines 0)
-
-    (org-indent-mode t)
-    ;; https://github.com/org-trello/org-trello/issues/249
-    ;; (let ((filename (buffer-file-name (current-buffer))))
-    ;;   (when (and filename (string= "trello" (file-name-extension filename)))
-    ;;     (org-trello-mode)))
+  (defun my-doom-docs-mode-hook ()
     )
   :hook ((org-mode . my-org-mode-hook))
   )
@@ -342,12 +308,14 @@
 ;; (setq emojify-emoji-styles (quote (unicode)))
 
 ;; https://ianyepan.github.io/posts/emacs-emojis/
-(use-package emojify
-  :ensure t
-  :config
-  (setq emojify-emoji-styles (quote (unicode)))
-  (global-emojify-mode)
-  )
+;; doom built-in
+;;
+;; (use-package emojify
+;;   ;; :ensure t
+;;   :config
+;;   (setq emojify-emoji-styles (quote (unicode)))
+;;   (global-emojify-mode)
+;;   )
 ;; (when (member "Segoe UI Emoji" (font-family-list))
 ;;   (set-fontset-font
 ;;    t 'symbol (font-spec :family "Segoe UI Emoji") nil 'prepend))
@@ -366,180 +334,44 @@
 ;; (global-undo-tree-mode -1)
 ;; (evil-set-undo-system 'undo-fu)
 
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode 1)
-  (global-undo-tree-mode -1)
-  (evil-set-undo-system 'undo-fu)
-  ;; This prevents us from typing 'j', so using the cofi solution below:
-  ;; (define-key evil-insert-state-map "jj" 'evil-normal-state)
-
-  ;; don't treat wrapped lines as a single line:
-  (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-  (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-  (define-key evil-motion-state-map (kbd "j") 'evil-next-visual-line)
-  (define-key evil-motion-state-map (kbd "k") 'evil-previous-visual-line)
-  (define-key evil-visual-state-map (kbd "j") 'evil-next-visual-line)
-  (define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
-
-  (define-key evil-normal-state-map [escape] 'keyboard-quit)
-  (define-key evil-visual-state-map [escape] 'keyboard-quit)
-  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-  )
-
-(use-package undo-fu
-  :config
-  (global-undo-tree-mode -1)
-  (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
-  (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo))
-
-
-;; Enable smash escape
-;; Type 'jj' for smash escape
-(define-key evil-insert-state-map "j" #'cofi/maybe-exit-jj)
-(evil-define-command cofi/maybe-exit-jj ()
-  :repeat change
-  (interactive)
-  (let ((modified (buffer-modified-p)))
-    (insert "j")
-    (let ((evt (read-event (format "Insert %c to exit insert state" ?j)
-                           nil 0.5)))
-      (cond
-       ((null evt) (message ""))
-       ((and (integerp evt) (char-equal evt ?j))
-        (delete-char -1)
-        (set-buffer-modified-p modified)
-        (push 'escape unread-command-events))
-       (t (setq unread-command-events (append unread-command-events
-                                              (list evt))))))))
-
-;; (add-hook 'evil-mode-hook
-;;           (lambda()
-;;             (local-unset-key "C-/")
-;;             (local-unset-key "C-z")
-;;             (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-;;             (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-;;             )
-;;           )
-
-(eval-after-load "evil-maps"
-  (dolist (map '(evil-motion-state-map
-
-                 evil-insert-state-map
-                 evil-emacs-state-map))
-    (define-key (eval map) "\C-z" nil)
-    (define-key (eval map) "\C-w" nil)
-    )
-  )
-
-;; Hooks to enabe/disable evil in other modes
-(add-hook 'term-mode-hook 'evil-emacs-state)
-(add-hook 'ansi-term-mode-hook 'evil-emacs-state)
-
-(use-package evil-surround
-  :ensure t
-  :config
-  ;; You can surround in visual-state with S<textobject> or
-  ;; gS<textobject>. Or in normal-state with ys<textobject> or
-  ;; yS<textobject>.
-  (global-evil-surround-mode 1))
-
-
-;;    (define-key (eval map) (kbd "C-/") nil)))
-
-;; (add-hook 'undo-tree-mode (lambda () (local-unset-key "C-/")))
-
-;; (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-;; (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-;; ;; (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up) ;; C-u interferes with org-mode bindings
-;; ;; (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
-;; (define-key evil-insert-state-map (kbd "C-u")
-;;   (lambda ()
-;;     (interactive)
-;;     (evil-delete (point-at-bol) (point))))
-
-;; evil-little-word bindings for camelCase:
-;; (define-key evil-operator-state-map (kbd "b") 'evil-backward-little-word-begin)
-;; (define-key evil-normal-state-map (kbd "w") 'subword-right)
-;; (define-key evil-normal-state-map (kbd "b") 'subword-left)
-
-;; ;; key translations
-;; ;; ie: translate zh to C-h and zx to C-x
-;; (define-key evil-normal-state-map "z" nil)
-;; (define-key evil-motion-state-map "zu" 'universal-argument)
-;; (define-key key-translation-map (kbd "zh") (kbd "C-h"))
-;; (define-key key-translation-map (kbd "zx") (kbd "C-x"))
-
-;;; esc quits pretty much anything (like pending prompts in the minibuffer)
-
-;; (define-key evil-normal-state-map [escape] 'keyboard-quit)
-;; (define-key evil-visual-state-map [escape] 'keyboard-quit)
-;; (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-;; (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-
-;; (define-key evil-insert-state-map "ㅏ" #'cofi/maybe-exit-ㅏㅓ)
-;;(define-key evil-insert-state-map "j" #'cofi/maybe-exit-ㅏㅓ)
-;; Set 'ㅏㅓ' to exit insert mode
-;;(evil-define-command cofi/maybe-exit-ㅏㅓ ()
-;;  :repeat change
-;;  (interactive)
-;;  (let ((modified (buffer-modified-p)))
-;;    (insert "ㅏ")
-;;    (let ((evt (read-event (format "Insert %c to exit insert state" ?ㅓ)
-;; (let ((evt (read-event (format "Insert %c to exit insert state" ?)
-;;               nil 0.5)))
-;;      (cond
-;;       ((null evt) (message ""))
-;;       ((and (integerp evt) (char-equal evt ?ㅓ))
-;;    (delete-char -1)
-;;    (set-buffer-modified-p modified)
-;;    (push 'escape unread-command-events))
-;;       (t (setq unread-command-events (append unread-command-events
-;;                          (list evt))))))))
-
-;; (evil-define-command cofi/maybe-exit-kj-korean ()
-;;   :repeat change
-;;   (interactive)
-;;   (let ((modified (buffer-modified-p)))
-;;     (self-insert-command 1)
-;;     (let ((evt (read-event (format "Insert %c to exit insert state"
-;;                                    (if (equal current-input-method
-;;                                               "arabic") ; "korean-hangul"
-;;                                        ?ؤ               ; ?ㅓ
-;;                                      ?j))
-;;                            nil 0.5)))
-;;       (cond
-;;        ((null evt) (message ""))
-;;        ((and (integerp evt) (memq evt '(?j ?ؤ))) ; '(?j ?ㅓ)
-;;         (delete-char -1)
-;;         (set-buffer-modified-p modified)
-;;         (push 'escape unread-command-events))
-;;        (t
-;;         (setq unread-command-events (append unread-command-events
-;;                                             (list evt))))))))
-
-;; (define-key evil-insert-state-map "ر" #'cofi/maybe-exit-kj-korean) ; "ㅏ"
-
-;;(defun test-my-key ()
-;;  (interactive)
-;;  (self-insert-command 1)
-;;  (message "This key works!")
-;;  (sit-for 2))
+;; doom built-in:j
 ;;
-;;(define-key evil-insert-state-map "a" #'test-my-key)
-;;(define-key evil-insert-state-map "ㅏ" #'test-my-key) ; Not working!
+;; (use-package evil
+;;   ;; :ensure t
+;;   :config
+;;   (evil-mode 1)
+;;   ;; (global-undo-tree-mode -1)
+;;   ;; (evil-set-undo-system 'undo-fu)
+;;   ;; This prevents us from typing 'j', so using the cofi solution below:
+;;   ;; (define-key evil-insert-state-map "jj" 'evil-normal-state)
+
+;;   ;; don't treat wrapped lines as a single line:
+;;   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+;;   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+;;   (define-key evil-motion-state-map (kbd "j") 'evil-next-visual-line)
+;;   (define-key evil-motion-state-map (kbd "k") 'evil-previous-visual-line)
+;;   (define-key evil-visual-state-map (kbd "j") 'evil-next-visual-line)
+;;   (define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
+
+;;   (define-key evil-normal-state-map [escape] 'keyboard-quit)
+;;   (define-key evil-visual-state-map [escape] 'keyboard-quit)
+;;   (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+;;   (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+;;   (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+;;   (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+;;   (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+;;   )
+
+;; (use-package undo-fu
+;;   :config
+;;   (global-undo-tree-mode -1)
+;;   (define-key evil-normal-state-map "u" 'undo-fu-only-undo)
+;;   (define-key evil-normal-state-map "\C-r" 'undo-fu-only-redo))
+
 
 ;;; Code:
 ;; INFO MODE
-(message "loading init-modes.el")
+;; (message "loading init-modes.el")
 (evil-set-initial-state 'Info-mode 'emacs)
 
 
@@ -715,17 +547,19 @@
 (autoload 'po-mode "po-mode" "Major mode for translators to edit PO files" t)
 
 ;; GIT-GUTTER MODE
-(require 'git-gutter)
+;; Doom built-in:j
+;; (require 'git-gutter)
 
 
 ;; DIRENV ENVRC
-(use-package direnv)
+;; Doom built-in:j
+;; (use-package direnv)
 ;; :config
 ;; (direnv-mode))
 
 
 ;; ;; If you enable global minor mode
-(global-git-gutter-mode t)
+;; (global-git-gutter-mode t)
 ;; (global-git-gutter-mode +1)
 
 ;; ;; If you would like to use git-gutter.el and linum-mode
@@ -736,53 +570,6 @@
 
 ;; (global-set-key (kbd "C-x C-g") 'git-gutter)
 ;; (global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
-
-;; Jump to next/previous hunk
-(global-set-key (kbd "C-x p") 'git-gutter:previous-hunk)
-(global-set-key (kbd "C-x n") 'git-gutter:next-hunk)
-
-
-;; abbrev-mode
-;;
-;; Just type the following, hit <space>, and the abbreviated value
-;; will be displayed.
-(define-abbrev-table 'global-abbrev-table '(
-                                            ("alpha0" "α")
-                                            ("beta0" "β")
-                                            ("gamma0" "γ")
-                                            ("theta0" "θ")
-                                            ("inf0" "∞")
-                                            ("ceilr0" "⌉")
-                                            ("ceill0" "⌈")
-                                            ("ar10" "→")
-                                            ("ar20" "⇒")
-                                            ("al10" "←")
-                                            ("al20" "⇐")
-                                            ("ad10" "↓")
-                                            ("ad20" "⇓")
-                                            ("au10" "↑")
-                                            ("au20" "⇑")
-                                            ("pi0" "π")
-                                            ("sigma0" "σ")
-                                            ("union0" "∪")
-                                            ("intersection0" "∩")
-                                            ("bowtie0" "⋈")
-                                            ("join0" "⋈")
-                                            ("rho0" "ρ")
-                                            ("almosteq0" "≈")
-                                            ("land0" "∧")
-                                            ("lor0" "∨")
-                                            ("lnot0" "¬")
-                                            ("cross0" "×")
-                                            ("superset0" "⊃")
-                                            ("supersetEq0" "⊇")
-                                            ("subset0" "⊂")
-                                            ("subsetEq0" "⊆")
-                                            ("element0" "∈")
-                                            ("exists0" "∃")
-                                            ))
-
-(setq-default abbrev-mode t)
 
 ;; Nix mode
 ;; https://github.com/NixOS/nix-mode
@@ -798,21 +585,3 @@
   :hook ((nix-mode . my-nix-mode-hook))
   )
 
-;; Projectile
-
-;; https://docs.projectile.mx/projectile/installation.html
-;; https://docs.projectile.mx/projectile/index.html
-;; https://github.com/bbatsov/projectile
-(use-package projectile
-  :ensure t
-  :init
-  ;; :pin melpa-stable
-  (projectile-mode +1)
-  :bind (:map projectile-mode-map
-              ;; Recommended keymap prefix on macOS
-              ("s-p" . projectile-command-map)
-              ;; Recommended keymap prefix on Windows/Linux
-              ("C-c p" . projectile-command-map)))
-
-(provide 'init-modes)
-;;; init-modes.el ends here

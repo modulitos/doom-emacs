@@ -42,19 +42,48 @@
 (global-set-key (kbd "M-m") 'shrink-window)
 
 ;; BUFFERS
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
-(global-set-key (kbd "s-p") 'helm-buffers-list)
-(global-set-key (kbd "C-p") 'helm-buffers-list)
+;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
+;; (global-set-key (kbd "s-p") 'helm-buffers-list)
+;; (global-set-key (kbd "C-p") 'helm-buffers-list)
+;; (global-set-key (kbd "C-p") 'consult-buffer)
 (with-eval-after-load 'evil-maps
-  (define-key evil-normal-state-map (kbd "C-p") nil))
+  (define-key evil-normal-state-map (kbd "C-p") nil)
+  (define-key evil-normal-state-map (kbd "C-p") 'consult-buffer)
+
+  ;; override
+  (define-key evil-normal-state-map (kbd "C-<tab>") nil)
+  ;; (define-key evil-normal-state-map [C-tab] nil)
+
+  ;; additional overrides in org-mode hook.
+
+  ;; ;; overrides metadown:
+  ;; (define-key evil-org-mode-map (kbd "<normal-state> M-j") nil)
+  ;; (define-key evil-org-mode-map (kbd "<insert-state> M-j") nil)
+  ;; (define-key evil-org-mode-map (kbd "<visual-state> M-j") nil)
+  ;; ;; overrides metaup:
+  ;; (define-key evil-org-mode-map (kbd "<normal-state> M-k") nil)
+  ;; (define-key evil-org-mode-map (kbd "<insert-state> M-k") nil)
+  ;; (define-key evil-org-mode-map (kbd "<visual-state> M-k") nil)
+  )
                                         ; switch keybindings for "save buffer" and "isearch-forward"
+
+;; Kill buffer
+
+;; (global-unset-key (kbd "C-w"))
+;; (dolist (key '("\C-w"))
+;;   (global-unset-key key))
+;; (define-key evil-motion-state-map "\C-w" nil)
+(eval-after-load "evil-maps"
+  (define-key evil-motion-state-map "\C-w" nil))
+(global-set-key (kbd "C-w") 'kill-buffer)
+;; (global-set-key (kbd "C-x k") 'kill-current-buffer)
 (global-set-key (kbd "C-s") 'save-buffer)
 (global-set-key (kbd "C-x C-s") 'isearch-forward)
 (global-set-key (kbd "<f2>") 'iedit-mode)  ;; originally bound to `C-c o`
                                         ; Cycle between buffers
-(global-set-key [(control f9)] 'buffer-stack-bury-and-kill)
-(global-set-key [(f12)] 'buffer-stack-track)
-(global-set-key [(control f12)] 'buffer-stack-untrack)
+;; (global-set-key [(control f9)] 'buffer-stack-bury-and-kill)
+;; (global-set-key [(f12)] 'buffer-stack-track)
+;; (global-set-key [(control f12)] 'buffer-stack-untrack)
 
 (global-set-key (kbd "C-M-n") 'git-gutter:next-hunk)
 (global-set-key (kbd "C-M-p") 'git-gutter:previous-hunk)
@@ -62,6 +91,14 @@
 (global-set-key [C-tab] 'buffer-stack-down)
 (global-set-key [C-S-iso-lefttab] 'buffer-stack-up);Linux
 (global-set-key [C-S-tab] 'buffer-stack-up);Windows/Linux
+
+;; (global-set-key (kbd "C-<tab>") 'next-buffer)
+
+;; (global-set-key [C-tab] 'previous-buffer)
+;; (global-set-key [C-S-iso-lefttab] 'next-buffer);Linux
+;; (global-set-key [C-S-tab] 'next-buffer);Windows/Linux
+
+
 ;; (global-set-key [tab] 'shift-right)
 ;; (global-set-key [backtab] 'shift-left)
 
@@ -73,9 +110,6 @@
 ;; (global-set-key [C-S-iso-lefttab] 'previous-buffer);Linux
 ;; (global-set-key [C-S-tab] 'previous-buffer);Windows/Linux
 
-;; Kill buffer
-(global-set-key (kbd "C-w") 'kill-buffer)
-;; (global-set-key (kbd "C-x k") 'kill-current-buffer)
 
                                         ; Re-open recently killed buffers
 (global-set-key (kbd "C-S-t") 'reopen-killed-file)
@@ -120,27 +154,28 @@
 ;; rect-mark.el
 ;; Rectangular mode editing - "C-x r" prefix, followed by normal mark/edit command.
 ;; reset the cursor (mark) position
-(global-set-key (kbd "C-x r C-SPC") 'rm-set-mark)
-(global-set-key (kbd "C-x r C-x") 'rm-exchange-point-and-mark)
-(global-set-key (kbd "C-x r C-w") 'rm-kill-region)
-(global-set-key (kbd "C-x r M-w") 'rm-kill-ring-save)
-(autoload 'rm-set-mark "rect-mark"
-  "Set mark for rectangle." t)
-(autoload 'rm-exchange-point-and-mark "rect-mark"
-  "Exchange point and mark for rectangle." t)
-(autoload 'rm-kill-region "rect-mark"
-  "Kill a rectangular region and save it in the kill ring." t)
-(autoload 'rm-kill-ring-save "rect-mark"
-  "Copy a rectangular region to the kill ring." t)
+;; (global-set-key (kbd "C-x r C-SPC") 'rm-set-mark)
+;; (global-set-key (kbd "C-x r C-x") 'rm-exchange-point-and-mark)
+;; (global-set-key (kbd "C-x r C-w") 'rm-kill-region)
+;; (global-set-key (kbd "C-x r M-w") 'rm-kill-ring-save)
+
+;; (autoload 'rm-set-mark "rect-mark"
+;;   "Set mark for rectangle." t)
+;; (autoload 'rm-exchange-point-and-mark "rect-mark"
+;;   "Exchange point and mark for rectangle." t)
+;; (autoload 'rm-kill-region "rect-mark"
+;;   "Kill a rectangular region and save it in the kill ring." t)
+;; (autoload 'rm-kill-ring-save "rect-mark"
+;;   "Copy a rectangular region to the kill ring." t)
 
 (global-set-key (kbd "C-S-i") 'whitespace-cleanup)
 
 
-(global-set-key (kbd "C-S-SPC") 'duplicate-current-line-or-region)
-
-(global-set-key (kbd "C-c C-t") 'ansi-term)
-
-(global-set-key (kbd "M-;") 'eval-region)
+;; (global-set-key (kbd "C-S-SPC") 'duplicate-current-line-or-region)
+;;
+;; (global-set-key (kbd "C-c C-t") 'ansi-term)
+;;
+;; (global-set-key (kbd "M-;") 'eval-region)
 
 (global-set-key (kbd "C-c u") 'browse-url)
 
@@ -181,11 +216,11 @@
 ;; Can use it in combination the following to jump around:
 ;; M-x imenu <my_func_name>
 
-(global-set-key (kbd "C-x r")
-                (lambda ()
-                  (interactive)
-                  (query-replace-regexp (isearch-forward-symbol-at-point))
-                  ))
+;; (global-set-key (kbd "C-x r")
+;;                 (lambda ()
+;;                   (interactive)
+;;                   (query-replace-regexp (isearch-forward-symbol-at-point))
+;;                   ))
 
 ;; INPUT METHODS
 (global-set-key (kbd "C-M-/") 'toggle-input-method)
@@ -229,3 +264,4 @@ Version 2017-09-01"
          $fpath )))))
 
 (provide 'keybindings)
+;;; keybindings.el ends here

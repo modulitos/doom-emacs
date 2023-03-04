@@ -75,5 +75,11 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 (add-load-path! "elisp")
-(load! "elisp/init-functions.el")
+(load! "elisp/common.el")
+(require 'cl-lib) ;; used by buffer-stack
+(load! "elisp/buffer-stack.el")
 (load! "elisp/keybindings.el")
+(load! "elisp/init-org-roam.el")
+(load! "elisp/init-org.el")
+(load! "elisp/init-modes.el")
+(load! "elisp/init-projectile.el")
