@@ -427,5 +427,5 @@ This is useful for opening multiple instances of Emacs."
   ;; (setq desktop-path '("~/workspaces/emacs/main" "~" "."))
   )
 
-(provide 'init-functions)
-;;; init-functions.el ends here
+(provide 'common)
+;;; common.el ends here
