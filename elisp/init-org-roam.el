@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; package -- summary
 ;;; commentary:
 ;; ORG ROAM MODE
