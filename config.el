@@ -78,6 +78,7 @@
 (load! "elisp/common.el")
 (require 'cl-lib) ;; used by buffer-stack
 (load! "elisp/buffer-stack.el")
+(load! "elisp/init-evil.el")
 (load! "elisp/keybindings.el")
 (load! "elisp/init-org-roam.el")
 (load! "elisp/init-org.el")

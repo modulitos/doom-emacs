@@ -21,7 +21,9 @@
     (local-unset-key (kbd "C-q"))
 
     ;; From evil-surround package to support anki cloze cards:
-    (push '(?z . ("{{c1::" . "}}")) evil-surround-pairs-alist)
+    ;; (message "adding to evil surround")
+    ;; (push '(?z . ("{{c1::" . "}}")) evil-surround-pairs-alist)
+    ;; (push '(z . ("{{c1::" . "}}")) evil-surround-pairs-alist)
     ;; (push '(?c1 . ("{{c1::" . "}}")) evil-surround-pairs-alist)
     ;; (push '(?c2 . ("{{c2::" . "}}")) evil-surround-pairs-alist)
     ;; (push '(?c3 . ("{{c3::" . "}}")) evil-surround-pairs-alist)

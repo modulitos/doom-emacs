@@ -1,9 +1,9 @@
 ;;; -*- lexical-binding: t; -*-
 ;;; package --- summary
 ;;; Commentary:
-(message "loading keybindings.el")
 
 ;;; Code:
+
 (define-key text-mode-map (kbd "M-s t") 'testing-MapAppLog.txt)
 (global-set-key (kbd "C-x C-;") 'comment-or-uncomment-region-or-line)
 
@@ -15,6 +15,7 @@
 
 
 (global-set-key (kbd "C-c k") 'delete-this-buffer-and-file)
+
 
 ;; WINDOWS
 
@@ -47,25 +48,6 @@
 ;; (global-set-key (kbd "s-p") 'helm-buffers-list)
 ;; (global-set-key (kbd "C-p") 'helm-buffers-list)
 ;; (global-set-key (kbd "C-p") 'consult-buffer)
-(with-eval-after-load 'evil-maps
-  (define-key evil-normal-state-map (kbd "C-p") nil)
-  (define-key evil-normal-state-map (kbd "C-p") 'consult-buffer)
-
-  ;; override
-  (define-key evil-normal-state-map (kbd "C-<tab>") nil)
-  ;; (define-key evil-normal-state-map [C-tab] nil)
-  )
-
-(with-eval-after-load 'evil-org
-  ;; overrides metadown:
-  (define-key evil-org-mode-map (kbd "<normal-state> M-j") nil)
-  (define-key evil-org-mode-map (kbd "<insert-state> M-j") nil)
-  (define-key evil-org-mode-map (kbd "<visual-state> M-j") nil)
-  ;; overrides metaup:
-  (define-key evil-org-mode-map (kbd "<normal-state> M-k") nil)
-  (define-key evil-org-mode-map (kbd "<insert-state> M-k") nil)
-  (define-key evil-org-mode-map (kbd "<visual-state> M-k") nil)
-  )
                                         ; switch keybindings for "save buffer" and "isearch-forward"
 
 ;; Kill buffer
@@ -73,9 +55,6 @@
 ;; (global-unset-key (kbd "C-w"))
 ;; (dolist (key '("\C-w"))
 ;;   (global-unset-key key))
-;; (define-key evil-motion-state-map "\C-w" nil)
-(eval-after-load "evil-maps"
-  (define-key evil-motion-state-map "\C-w" nil))
 (global-set-key (kbd "C-w") 'kill-buffer)
 ;; (global-set-key (kbd "C-x k") 'kill-current-buffer)
 (global-set-key (kbd "C-s") 'save-buffer)
