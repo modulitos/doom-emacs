@@ -193,4 +193,3 @@
        ;;literate
        (default +bindings +smartparens))
 
-;; (require 'keybindings)

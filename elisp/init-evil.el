@@ -32,14 +32,20 @@
   )
 
 (with-eval-after-load 'evil-org
-  ;; overrides metadown:
+  ;; overrides metadown/up to enable window switching:
   (define-key evil-org-mode-map (kbd "<normal-state> M-j") nil)
   (define-key evil-org-mode-map (kbd "<insert-state> M-j") nil)
   (define-key evil-org-mode-map (kbd "<visual-state> M-j") nil)
-  ;; overrides metaup:
   (define-key evil-org-mode-map (kbd "<normal-state> M-k") nil)
   (define-key evil-org-mode-map (kbd "<insert-state> M-k") nil)
   (define-key evil-org-mode-map (kbd "<visual-state> M-k") nil)
+
+  ;; overrides keybindings to enable evil visual-line fuctions:
+  (define-key evil-org-mode-map (kbd "<motion-state> g k") nil)
+  (define-key evil-org-mode-map (kbd "<motion-state> g j") nil)
+
+  ;; evil binds <tab> to evil-jump-forward by default.
+  (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
   )
 
 ;; You can surround in visual-state with S<textobject> or
