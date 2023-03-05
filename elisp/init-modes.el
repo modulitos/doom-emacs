@@ -7,26 +7,6 @@
 ;;; Code:
 
 
-;; Enable smash escape
-;; Type 'jj' for smash escape
-(define-key evil-insert-state-map "j" #'cofi/maybe-exit-jj)
-(evil-define-command cofi/maybe-exit-jj ()
-  :repeat change
-  (interactive)
-  (let ((modified (buffer-modified-p)))
-    (insert "j")
-    (let ((evt (read-event (format "Insert %c to exit insert state" ?j)
-                           nil 0.5)))
-      (cond
-       ((null evt) (message ""))
-       ((and (integerp evt) (char-equal evt ?j))
-        (delete-char -1)
-        (set-buffer-modified-p modified)
-        (push 'escape unread-command-events))
-       (t (setq unread-command-events (append unread-command-events
-                                              (list evt))))))))
-
-
 ;; (add-hook 'evil-mode-hook
 ;;           (lambda()
 ;;             (local-unset-key "C-/")
@@ -49,14 +29,6 @@
 ;; Hooks to enabe/disable evil in other modes
 ;; (add-hook 'term-mode-hook 'evil-emacs-state)
 ;; (add-hook 'ansi-term-mode-hook 'evil-emacs-state)
-
-(use-package evil-surround
-  :config
-  ;; You can surround in visual-state with S<textobject> or
-  ;; gS<textobject>. Or in normal-state with ys<textobject> or
-  ;; yS<textobject>.
-  (global-evil-surround-mode 1))
-
 
 ;;    (define-key (eval map) (kbd "C-/") nil)))
 
