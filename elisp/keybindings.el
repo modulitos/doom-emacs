@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; package --- summary
 ;;; Commentary:
 (message "loading keybindings.el")
@@ -53,17 +54,17 @@
   ;; override
   (define-key evil-normal-state-map (kbd "C-<tab>") nil)
   ;; (define-key evil-normal-state-map [C-tab] nil)
+  )
 
-  ;; additional overrides in org-mode hook.
-
-  ;; ;; overrides metadown:
-  ;; (define-key evil-org-mode-map (kbd "<normal-state> M-j") nil)
-  ;; (define-key evil-org-mode-map (kbd "<insert-state> M-j") nil)
-  ;; (define-key evil-org-mode-map (kbd "<visual-state> M-j") nil)
-  ;; ;; overrides metaup:
-  ;; (define-key evil-org-mode-map (kbd "<normal-state> M-k") nil)
-  ;; (define-key evil-org-mode-map (kbd "<insert-state> M-k") nil)
-  ;; (define-key evil-org-mode-map (kbd "<visual-state> M-k") nil)
+(with-eval-after-load 'evil-org
+  ;; overrides metadown:
+  (define-key evil-org-mode-map (kbd "<normal-state> M-j") nil)
+  (define-key evil-org-mode-map (kbd "<insert-state> M-j") nil)
+  (define-key evil-org-mode-map (kbd "<visual-state> M-j") nil)
+  ;; overrides metaup:
+  (define-key evil-org-mode-map (kbd "<normal-state> M-k") nil)
+  (define-key evil-org-mode-map (kbd "<insert-state> M-k") nil)
+  (define-key evil-org-mode-map (kbd "<visual-state> M-k") nil)
   )
                                         ; switch keybindings for "save buffer" and "isearch-forward"
 
@@ -175,7 +176,7 @@
 ;;
 ;; (global-set-key (kbd "C-c C-t") 'ansi-term)
 ;;
-;; (global-set-key (kbd "M-;") 'eval-region)
+(global-set-key (kbd "M-;") 'eval-region)
 
 (global-set-key (kbd "C-c u") 'browse-url)
 

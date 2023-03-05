@@ -46,22 +46,7 @@
     ;; (let ((filename (buffer-file-name (current-buffer))))
     ;;   (when (and filename (string= "trello" (file-name-extension filename)))
     ;;     (org-trello-mode)))
-(with-eval-after-load 'evil-maps
-  ;; (define-key evil-normal-state-map (kbd "C-p") nil)
 
-  ;; ;; override
-  ;; (define-key evil-normal-state-map (kbd "C-<tab>") nil)
-  ;; ;; (define-key evil-normal-state-map [C-tab] nil)
-
-  ;; overrides metadown:
-  (define-key evil-org-mode-map (kbd "<normal-state> M-j") nil)
-  (define-key evil-org-mode-map (kbd "<insert-state> M-j") nil)
-  (define-key evil-org-mode-map (kbd "<visual-state> M-j") nil)
-  ;; overrides metaup:
-  (define-key evil-org-mode-map (kbd "<normal-state> M-k") nil)
-  (define-key evil-org-mode-map (kbd "<insert-state> M-k") nil)
-  (define-key evil-org-mode-map (kbd "<visual-state> M-k") nil)
-  )
     )
   :hook ((org-mode . my-org-mode-hook))
   )

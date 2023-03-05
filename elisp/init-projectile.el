@@ -1,4 +1,4 @@
-;;; elisp/init-projectile.el -*- lexical-binding: t; -*-
+;;; -*- lexical-binding: t; -*-
 ;;;
 ;;; package --- summary
 ;;; Commentary:

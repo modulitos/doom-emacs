@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; package --- summary
 ;;; Commentary:
 (message "loading functions.el")
