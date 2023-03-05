@@ -19,6 +19,7 @@
     (local-unset-key (kbd "M-k"))
     (local-unset-key (kbd "M-h"))
     (local-unset-key (kbd "C-q"))
+    (local-unset-key (kbd "C-q"))
 
     ;; From evil-surround package to support anki cloze cards:
     ;; (message "adding to evil surround")
@@ -30,9 +31,6 @@
 
     ;; override default keybinding here:
     (local-set-key (kbd "C-S-i") 'whitespace-cleanup)
-
-    ;; evil binds <tab> to evil-jump-forward by default.
-    (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
 
     ;; (local-set-key (kbd "C-c C-c") 'org-table-align)
     ;; (local-unset-key (kbd "C-c C-c"))

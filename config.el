@@ -84,6 +84,7 @@
 (load! "elisp/init-org.el")
 (load! "elisp/init-modes.el")
 (load! "elisp/init-projectile.el")
+(load! "elisp/init-foreign-languages.el")
 
 (after! doom-modeline
   (setq doom-modeline-persp-name t))
