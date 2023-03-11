@@ -48,6 +48,14 @@
   (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
   )
 
+
+(with-eval-after-load 'evil-markdown
+  (define-key evil-markdown-mode-map (kbd "<normal-state> M-k") nil)
+  (define-key evil-markdown-mode-map (kbd "<visual-state> M-k") nil)
+  (define-key evil-markdown-mode-map (kbd "<normal-state> M-j") nil)
+  (define-key evil-markdown-mode-map (kbd "<visual-state> M-j") nil)
+  )
+
 ;; You can surround in visual-state with S<textobject> or
 ;; gS<textobject>. Or in normal-state with ys<textobject> or
 ;; yS<textobject>.
@@ -60,9 +68,9 @@
     ;; (setq-default evil-surround-pairs-alist
     ;;               (push '(?\] . ("{{c1::" . "}}")) evil-surround-pairs-alist)
     ;;               evil-surround-pairs-alist)
-  )
+    )
   :hook ((evil-surround-mode . my-evil-surround-mode-hook))
-)
+  )
 
 (provide 'init-evil)
 ;;; init-evil.el ends here

@@ -10,7 +10,6 @@
   :mode (("\\.org$" . org-mode))
   :config
   (defun my-org-mode-hook ()
-    (message "inside my-org-mode-hook!")
     "Hooks for Org mode."
     (local-unset-key [C-tab])
     ;; allow window resizing via M-l and M-h
