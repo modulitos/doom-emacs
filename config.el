@@ -83,6 +83,8 @@
 (load! "elisp/init-org-roam.el")
 (load! "elisp/init-org.el")
 (load! "elisp/init-modes.el")
+(load! "elisp/init-go.el")
+(load! "elisp/init-markdown.el")
 (load! "elisp/init-projectile.el")
 (load! "elisp/init-foreign-languages.el")
 
