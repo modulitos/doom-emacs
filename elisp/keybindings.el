@@ -16,6 +16,8 @@
 
 (global-set-key (kbd "C-c k") 'delete-this-buffer-and-file)
 
+;; Unset so we can override this keybinding with 'better-jumper-jump-backward:
+(global-unset-key (kbd "M-b"))
 
 ;; WINDOWS
 
