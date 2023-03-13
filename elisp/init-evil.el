@@ -20,6 +20,10 @@
        (t (setq unread-command-events (append unread-command-events
                                               (list evt))))))))
 
+;; Work around bug with evil / org mode unable to search in folded text:
+;; https://github.com/doomemacs/doomemacs/issues/6478#issuecomment-1406167570
+(evil-select-search-module 'evil-search-module 'isearch)
+
 (with-eval-after-load 'evil-maps
   (define-key evil-normal-state-map (kbd "C-p") nil)
   (define-key evil-normal-state-map (kbd "C-p") 'consult-buffer)
