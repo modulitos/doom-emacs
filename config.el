@@ -91,3 +91,6 @@
 
 (after! doom-modeline
   (setq doom-modeline-persp-name t))
+(after! lsp-ui
+  (setq lsp-ui-sideline-diagnostic-max-lines 2))
+;; (global-visual-line-mode t)
