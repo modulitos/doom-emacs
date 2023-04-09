@@ -89,6 +89,7 @@
 (load! "elisp/init-projectile.el")
 (load! "elisp/init-foreign-languages.el")
 
+(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
 (after! doom-modeline
   (setq doom-modeline-persp-name t))
 (after! lsp-ui
