@@ -87,7 +87,12 @@
 (load! "elisp/init-ruby.el")
 (load! "elisp/init-markdown.el")
 (load! "elisp/init-projectile.el")
+;; (load! "elisp/init-protobuf.el")
 (load! "elisp/init-foreign-languages.el")
+
+;; Don't truncate lines by default:
+;; https://www.emacswiki.org/emacs/TruncateLines
+(set-default 'truncate-lines nil)
 
 (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
 (after! doom-modeline
@@ -95,3 +100,9 @@
 (after! lsp-ui
   (setq lsp-ui-sideline-diagnostic-max-lines 2))
 ;; (global-visual-line-mode t)
+
+;; TODO: we can remove this once we've remove .git from our home dir:
+(after! projectile (setq projectile-project-root-files-bottom-up (remove ".git"
+          projectile-project-root-files-bottom-up)))
+
+(after! projectile (setq projectile-project-root-files-bottom-up (append projectile-project-root-files-bottom-up '(".envrc"))))
