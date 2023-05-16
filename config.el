@@ -101,8 +101,4 @@
   (setq lsp-ui-sideline-diagnostic-max-lines 2))
 ;; (global-visual-line-mode t)
 
-;; TODO: we can remove this once we've remove .git from our home dir:
-(after! projectile (setq projectile-project-root-files-bottom-up (remove ".git"
-          projectile-project-root-files-bottom-up)))
-
 (after! projectile (setq projectile-project-root-files-bottom-up (append projectile-project-root-files-bottom-up '(".envrc"))))

@@ -67,6 +67,8 @@
 (use-package evil-surround
   :config
   (defun my-evil-surround-mode-hook ()
+    ;; for handling anki cloze cards:
+    ;; (when selection is highlighted in visual mode, press `S]` to surround in a close tag)
     (push '(?\] . ("{{c1::" . "}}")) evil-surround-pairs-alist)
     ;; maybe there's a way to only set this once?
     ;; (setq-default evil-surround-pairs-alist
