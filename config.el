@@ -101,4 +101,3 @@
   (setq lsp-ui-sideline-diagnostic-max-lines 2))
 ;; (global-visual-line-mode t)
 
-(after! projectile (setq projectile-project-root-files-bottom-up (append projectile-project-root-files-bottom-up '(".envrc"))))
