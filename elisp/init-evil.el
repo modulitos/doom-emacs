@@ -58,6 +58,10 @@
   (define-key evil-markdown-mode-map (kbd "<visual-state> M-k") nil)
   (define-key evil-markdown-mode-map (kbd "<normal-state> M-j") nil)
   (define-key evil-markdown-mode-map (kbd "<visual-state> M-j") nil)
+
+  ;; overrides keybindings to enable evil visual-line fuctions:
+  (define-key evil-markdown-mode-map (kbd "<motion-state> g k") nil)
+  (define-key evil-markdown-mode-map (kbd "<motion-state> g j") nil)
   )
 
 ;; You can surround in visual-state with S<textobject> or

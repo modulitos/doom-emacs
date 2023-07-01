@@ -277,7 +277,7 @@
 ;; (org-force-cycle-archived) It is bound to <C-tab>.
 
 ;; ORG-AGENDA
-(define-key global-map "\C-ca" 'org-agenda)
+;; (define-key global-map "\C-ca" 'org-agenda)
 
 ;; ORG-TRELLO
 ;; (custom-set-variables '(org-trello-files '("~/Documents/mgmt-docs/calendar.trello" "~/Documents/mgmt-docs/haxgeo-trello.trello" "~/Documents/mgmt-docs/floortek-calendar.trello") ))

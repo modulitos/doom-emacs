@@ -101,3 +101,7 @@
   (setq lsp-ui-sideline-diagnostic-max-lines 2))
 ;; (global-visual-line-mode t)
 
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]vendor\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.devenv\\'")
+  )
