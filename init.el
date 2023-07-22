@@ -157,7 +157,7 @@
        ;;ocaml             ; an objective camel
        org                ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
-       ;;plantuml          ; diagrams for confusing people more
+       plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
        python            ; beautiful is better than ugly
        ;; (python +lsp) ; do this? https://docs.doomemacs.org/latest/modules/lang/python/#/description/module-flags/lsp

@@ -162,5 +162,21 @@
 (setq-default abbrev-mode t)
 
 
+(use-package plantuml-mode
+  :mode (("\\.uml$" . plantuml-mode))
+  :config
+  (defun my-plantuml-mode-hook ()
+    ;; ;; Use goimports instead of gofmt:
+    ;; ;; https://pkg.go.dev/golang.org/x/tools/cmd/goimports
+    ;; (setq gofmt-command "goimports")
+    ;; (add-hook 'before-save-hook 'gofmt-before-save)
+    ;; (local-set-key (kbd "M-b") 'better-jumper-jump-backward)
+    ;; (local-set-key (kbd "M-RET") '+lookup/definition)
+    )
+
+  :hook ((plantuml-mode . my-plantuml-mode-hook))
+  )
+
+
 (provide 'init-modes)
 ;;; init-modes.el ends here
