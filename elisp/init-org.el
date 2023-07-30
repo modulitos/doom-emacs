@@ -19,6 +19,7 @@
     (local-unset-key (kbd "M-h"))
     (local-unset-key (kbd "C-q"))
     (local-unset-key (kbd "C-q"))
+    (flyspell-mode t)
 
     ;; From evil-surround package to support anki cloze cards:
     ;; (message "adding to evil surround")
