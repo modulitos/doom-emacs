@@ -18,8 +18,8 @@
        ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
        ;;chinese
        ;;japanese
-       korean
-       spanish
+       ;; korean
+       ;; spanish
        ;;layout            ; auie,ctsrnm is the superior home row
 
        :completion
