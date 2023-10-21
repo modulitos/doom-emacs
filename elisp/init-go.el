@@ -3,7 +3,7 @@
 
 
 (use-package go-mode
-  :mode (("\\.org$" . org-mode))
+  :mode (("\\.go$" . go-mode))
   :config
   (defun my-go-mode-hook ()
     ;; Use goimports instead of gofmt:
