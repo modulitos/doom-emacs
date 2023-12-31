@@ -86,6 +86,7 @@
 (load! "elisp/init-js.el")
 (load! "elisp/init-go.el")
 (load! "elisp/init-ruby.el")
+(load! "elisp/init-python.el")
 (load! "elisp/init-markdown.el")
 (load! "elisp/init-projectile.el")
 ;; (load! "elisp/init-protobuf.el")
