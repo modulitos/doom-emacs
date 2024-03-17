@@ -82,6 +82,7 @@
 (load! "elisp/keybindings.el")
 (load! "elisp/init-org-roam.el")
 (load! "elisp/init-org.el")
+(load! "elisp/init-lsp.el")
 (load! "elisp/init-modes.el")
 (load! "elisp/init-js.el")
 (load! "elisp/init-go.el")
@@ -106,4 +107,22 @@
 (with-eval-after-load 'lsp-mode
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]vendor\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.devenv\\'")
+  )
+
+;; accept completion from copilot and fallback to company
+;; https://github.com/copilot-emacs/copilot.el
+;; https://github.com/rksm/copilot-emacsd/blob/master/init.el
+;; https://robert.kra.hn/posts/2023-02-22-copilot-emacs-setup/
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
+(after! copilot-mode
+  (add-to-list
+   'copilot-indentation-alist
+   '(nix-mode 2)
+   '(elisp-mode 2))
   )

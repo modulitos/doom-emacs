@@ -32,6 +32,10 @@
     ;; override default keybinding here:
     (local-set-key (kbd "C-S-i") 'whitespace-cleanup)
 
+    ;; don't hide link urls
+    ;; or M-x org-toggle-link-display
+    (setq! org-link-descriptive nil)
+
     ;; (local-set-key (kbd "C-c C-c") 'org-table-align)
     ;; (local-unset-key (kbd "C-c C-c"))
     ;; (local-set-key (kbd "C-c C-f") 'org-table-calc-current-TBLFM)
