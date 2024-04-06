@@ -119,10 +119,14 @@
               ("<tab>" . 'copilot-accept-completion)
               ("TAB" . 'copilot-accept-completion)
               ("C-TAB" . 'copilot-accept-completion-by-word)
-              ("C-<tab>" . 'copilot-accept-completion-by-word)))
-(after! copilot-mode
+              ("C-<tab>" . 'copilot-accept-completion-by-word))
+  :config
+  ;; https://github.com/copilot-emacs/copilot.el/issues/249
   (add-to-list
    'copilot-indentation-alist
+   ;; '(emacs-lisp-mode 2)
+   '(go-mode 4)
    '(nix-mode 2)
-   '(elisp-mode 2))
+   ;; '(elisp-mode 2) ;; this doesn't work?
+   )
   )
