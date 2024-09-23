@@ -87,6 +87,7 @@
 (load! "elisp/init-js.el")
 (load! "elisp/init-go.el")
 (load! "elisp/init-ruby.el")
+(load! "elisp/init-rust.el")
 (load! "elisp/init-python.el")
 (load! "elisp/init-markdown.el")
 (load! "elisp/init-projectile.el")
@@ -104,9 +105,11 @@
   (setq lsp-ui-sideline-diagnostic-max-lines 2))
 ;; (global-visual-line-mode t)
 
-(with-eval-after-load 'lsp-mode
+;; (with-eval-after-load 'lsp-mode
+(after! lsp-mode
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]vendor\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.devenv\\'")
+  (setq lsp-inlay-hint-enable t)
   )
 
 ;; accept completion from copilot and fallback to company
