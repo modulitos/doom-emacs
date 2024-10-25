@@ -21,6 +21,10 @@
 
     ;; repeated in init-evil, but we need it here as well,
     ;; or else it gets overwritten by org-forward-element:
+    (define-key evil-org-mode-map (kbd "<visual-state> g k") nil)
+    (define-key evil-org-mode-map (kbd "<visual-state> g j") nil)
+    (define-key evil-org-mode-map (kbd "<normal-state> g k") nil)
+    (define-key evil-org-mode-map (kbd "<normal-state> g j") nil)
     (define-key evil-org-mode-map (kbd "<motion-state> g k") nil)
     (define-key evil-org-mode-map (kbd "<motion-state> g j") nil)
 
