@@ -24,6 +24,7 @@
 ;; https://github.com/doomemacs/doomemacs/issues/6478#issuecomment-1406167570
 (evil-select-search-module 'evil-search-module 'isearch)
 
+;; replace with use-package?
 (with-eval-after-load 'evil-maps
   (define-key evil-normal-state-map (kbd "C-p") nil)
   (define-key evil-normal-state-map (kbd "C-p") 'consult-buffer)
@@ -35,24 +36,7 @@
   (define-key evil-motion-state-map "\C-w" nil)
   )
 
-(with-eval-after-load 'evil-org
-  ;; overrides metadown/up to enable window switching:
-  (define-key evil-org-mode-map (kbd "<normal-state> M-j") nil)
-  (define-key evil-org-mode-map (kbd "<insert-state> M-j") nil)
-  (define-key evil-org-mode-map (kbd "<visual-state> M-j") nil)
-  (define-key evil-org-mode-map (kbd "<normal-state> M-k") nil)
-  (define-key evil-org-mode-map (kbd "<insert-state> M-k") nil)
-  (define-key evil-org-mode-map (kbd "<visual-state> M-k") nil)
-
-  ;; overrides keybindings to enable evil visual-line fuctions:
-  (define-key evil-org-mode-map (kbd "<motion-state> g k") nil)
-  (define-key evil-org-mode-map (kbd "<motion-state> g j") nil)
-
-  ;; evil binds <tab> to evil-jump-forward by default.
-  (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
-  )
-
-
+;; replace with use-package?
 (with-eval-after-load 'evil-markdown
   (define-key evil-markdown-mode-map (kbd "<normal-state> M-k") nil)
   (define-key evil-markdown-mode-map (kbd "<visual-state> M-k") nil)
@@ -80,6 +64,38 @@
     ;;               evil-surround-pairs-alist)
     )
   :hook ((evil-surround-mode . my-evil-surround-mode-hook))
+  )
+
+(use-package evil-org
+  ;; load evil-org after org-mode, or else visual-line functions ("g k" and "g
+  ;; j") get overwritten by 'org-forward-element'.
+  :after org
+
+  :config
+  (defun my-evil-org-mode-hook ()
+
+    (message "evil-org-mode hook")
+    ;; overrides metadown/up to enable window switching:
+    (define-key evil-org-mode-map (kbd "<normal-state> M-j") nil)
+    (define-key evil-org-mode-map (kbd "<insert-state> M-j") nil)
+    (define-key evil-org-mode-map (kbd "<visual-state> M-j") nil)
+    (define-key evil-org-mode-map (kbd "<normal-state> M-k") nil)
+    (define-key evil-org-mode-map (kbd "<insert-state> M-k") nil)
+    (define-key evil-org-mode-map (kbd "<visual-state> M-k") nil)
+
+    ;; overrides keybindings to enable evil visual-line fuctions:
+    ;; (message "evil org eval")
+    (define-key evil-org-mode-map (kbd "<motion-state> g k") nil)
+    (define-key evil-org-mode-map (kbd "<motion-state> g j") nil)
+    (define-key evil-org-mode-map (kbd "<visual-state> g k") nil)
+    (define-key evil-org-mode-map (kbd "<visual-state> g j") nil)
+    (define-key evil-org-mode-map (kbd "<normal-state> g k") nil)
+    (define-key evil-org-mode-map (kbd "<normal-state> g j") nil)
+
+    ;; evil binds <tab> to evil-jump-forward by default.
+    (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
+    )
+  :hook ((evil-org-mode . my-evil-org-mode-hook))
   )
 
 (provide 'init-evil)
