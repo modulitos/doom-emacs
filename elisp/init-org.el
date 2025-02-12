@@ -13,6 +13,7 @@
     "Hooks for Org mode."
     (local-unset-key [C-tab])
     ;; allow window resizing via M-l and M-h
+    ;; (fixed in evil-org-mode hook?)
     (local-unset-key (kbd "M-l"))
     (local-unset-key (kbd "M-j"))
     (local-unset-key (kbd "M-k"))

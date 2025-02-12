@@ -82,6 +82,12 @@
     (define-key evil-org-mode-map (kbd "<normal-state> M-k") nil)
     (define-key evil-org-mode-map (kbd "<insert-state> M-k") nil)
     (define-key evil-org-mode-map (kbd "<visual-state> M-k") nil)
+    (define-key evil-org-mode-map (kbd "<normal-state> M-h") nil)
+    (define-key evil-org-mode-map (kbd "<insert-state> M-h") nil)
+    (define-key evil-org-mode-map (kbd "<visual-state> M-h") nil)
+    (define-key evil-org-mode-map (kbd "<normal-state> M-l") nil)
+    (define-key evil-org-mode-map (kbd "<insert-state> M-l") nil)
+    (define-key evil-org-mode-map (kbd "<visual-state> M-l") nil)
 
     ;; overrides keybindings to enable evil visual-line fuctions:
     ;; (message "evil org eval")
