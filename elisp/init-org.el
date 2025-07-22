@@ -20,6 +20,21 @@
     (local-unset-key (kbd "M-h"))
     (local-unset-key (kbd "C-q"))
 
+
+    (define-key outline-mode-map (kbd "<normal-state> M-j") nil)
+    (define-key outline-mode-map (kbd "<insert-state> M-j") nil)
+    (define-key outline-mode-map (kbd "<visual-state> M-j") nil)
+    (define-key outline-mode-map (kbd "<normal-state> M-k") nil)
+    (define-key outline-mode-map (kbd "<insert-state> M-k") nil)
+    (define-key outline-mode-map (kbd "<visual-state> M-k") nil)
+
+    (define-key org-mode-map (kbd "<motion-state> g k") nil)
+    (define-key org-mode-map (kbd "<motion-state> g j") nil)
+    (define-key org-mode-map (kbd "<visual-state> g k") nil)
+    (define-key org-mode-map (kbd "<visual-state> g j") nil)
+    (define-key org-mode-map (kbd "<normal-state> g k") nil)
+    (define-key org-mode-map (kbd "<normal-state> g j") nil)
+
     (flyspell-mode t)
 
     ;; From evil-surround package to support anki cloze cards:
