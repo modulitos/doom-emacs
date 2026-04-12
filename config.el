@@ -114,24 +114,24 @@
   (setq lsp-inlay-hint-enable t)
   )
 
-;; accept completion from copilot and fallback to company
-;; https://github.com/copilot-emacs/copilot.el
-;; https://github.com/rksm/copilot-emacsd/blob/master/init.el
-;; https://robert.kra.hn/posts/2023-02-22-copilot-emacs-setup/
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("<tab>" . 'copilot-accept-completion)
-              ("TAB" . 'copilot-accept-completion)
-              ("C-TAB" . 'copilot-accept-completion-by-word)
-              ("C-<tab>" . 'copilot-accept-completion-by-word))
-  :config
-  ;; https://github.com/copilot-emacs/copilot.el/issues/249
-  (add-to-list
-   'copilot-indentation-alist
-   ;; '(emacs-lisp-mode 2)
-   '(go-mode 4)
-   '(nix-mode 2)
-   ;; '(elisp-mode 2) ;; this doesn't work?
-   )
-  )
+;; ;; accept completion from copilot and fallback to company
+;; ;; https://github.com/copilot-emacs/copilot.el
+;; ;; https://github.com/rksm/copilot-emacsd/blob/master/init.el
+;; ;; https://robert.kra.hn/posts/2023-02-22-copilot-emacs-setup/
+;; (use-package! copilot
+;;   :hook (prog-mode . copilot-mode)
+;;   :bind (:map copilot-completion-map
+;;               ("<tab>" . 'copilot-accept-completion)
+;;               ("TAB" . 'copilot-accept-completion)
+;;               ("C-TAB" . 'copilot-accept-completion-by-word)
+;;               ("C-<tab>" . 'copilot-accept-completion-by-word))
+;;   :config
+;;   ;; https://github.com/copilot-emacs/copilot.el/issues/249
+;;   (add-to-list
+;;    'copilot-indentation-alist
+;;    ;; '(emacs-lisp-mode 2)
+;;    '(go-mode 4)
+;;    '(nix-mode 2)
+;;    ;; '(elisp-mode 2) ;; this doesn't work?
+;;    )
+;;   )
