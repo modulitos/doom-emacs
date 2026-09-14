@@ -74,8 +74,17 @@
   :config
   (defun my-evil-org-mode-hook ()
 
-    (message "evil-org-mode hook")
-    ;; ;; overrides metadown/up to enable window switching:
+    (message "evil-org-mode hook 2")
+    
+    ;; allow window resizing via M-l and M-h
+    ;; (fixed in evil-org-mode hook?)
+    ;; (local-unset-key (kbd "M-l"))
+    ;; (local-unset-key (kbd "M-j"))
+    ;; (local-unset-key (kbd "M-k"))
+    ;; (local-unset-key (kbd "M-h"))
+    ;; (local-unset-key (kbd "C-q"))
+
+    ;; ;; ;; overrides metadown/up to enable window switching:
     ;; (define-key evil-org-mode-map (kbd "<normal-state> M-j") nil)
     ;; (define-key evil-org-mode-map (kbd "<insert-state> M-j") nil)
     ;; (define-key evil-org-mode-map (kbd "<visual-state> M-j") nil)
