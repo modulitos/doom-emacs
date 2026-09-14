@@ -34,13 +34,13 @@
     (define-key org-mode-map (kbd "<visual-state> g j") nil)
     (define-key org-mode-map (kbd "<normal-state> g k") nil)
     (define-key org-mode-map (kbd "<normal-state> g j") nil)
-
-    (define-key evil-org-mode-map (kbd "<motion-state> g k") evil-previous-visual-line)
-    (define-key evil-org-mode-map (kbd "<motion-state> g j") evil-next-visual-line)
-    (define-key evil-org-mode-map (kbd "<visual-state> g k") evil-previous-visual-line)
-    (define-key evil-org-mode-map (kbd "<visual-state> g j") evil-next-visual-line)
-    (define-key evil-org-mode-map (kbd "<normal-state> g k") evil-previous-visual-line)
-    (define-key evil-org-mode-map (kbd "<normal-state> g j") evil-next-visual-line)
+    
+    (define-key evil-org-mode-map (kbd "<motion-state> g k") #'evil-previous-visual-line)
+    (define-key evil-org-mode-map (kbd "<motion-state> g j") #'evil-next-visual-line)
+    (define-key evil-org-mode-map (kbd "<visual-state> g k") #'evil-previous-visual-line)
+    (define-key evil-org-mode-map (kbd "<visual-state> g j") #'evil-next-visual-line)
+    (define-key evil-org-mode-map (kbd "<normal-state> g k") #'evil-previous-visual-line)
+    (define-key evil-org-mode-map (kbd "<normal-state> g j") #'evil-next-visual-line)
 
     (flyspell-mode t)
 

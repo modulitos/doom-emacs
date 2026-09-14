@@ -81,7 +81,7 @@
 (load! "elisp/init-evil.el")
 (load! "elisp/keybindings.el")
 (load! "elisp/init-org-roam.el")
-(load! "elisp/init-org.el")
+(after! evil-org  (load! "elisp/init-org.el"))
 (load! "elisp/init-lsp.el")
 (load! "elisp/init-modes.el")
 (load! "elisp/init-java.el")
